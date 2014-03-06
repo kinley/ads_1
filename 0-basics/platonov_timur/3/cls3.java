@@ -8,11 +8,9 @@ public class cls3 {
             String s = sc.next();
             int a = sc.nextInt();
             int b = sc.nextInt();
-            int z = s.length();
-            double d = (double)a/b; // явно преобразовываем в double
 
             // для слишком больших строк вывод не будет красивым
-            System.out.printf("%60s, %9d, %9d, %13.3f\n", s, a, b, d);
+            System.out.printf("%60s, %9d, %9d, %13.3f\n", s, a, b, (double)a/b);
         }
     }
 
