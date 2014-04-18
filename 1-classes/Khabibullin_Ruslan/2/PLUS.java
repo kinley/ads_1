@@ -1,47 +1,44 @@
-//Отдельный класс PLUS с методами
+////РћС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ PLUS СЃ РјРµС‚РѕРґР°РјРё
 public class PLUS {
 	public double R,I;
-	public PLUS() {
-		this.I=0;
-		this.R=0;
-	}
+	
 	public PLUS(double R, double I){
 		this.I=I;
 		this.R=R;
 	}
-	public PLUS create(double R, double I){	//Создаем
-		PLUS A=new PLUS();
-		A.I=I;
-		A.R=R;
-		return A;
+
+	public double getR(){
+		return this.R;
 	}
-	public double voltage(){	//Вычисляем напряжение
-		PLUS A=this;
-		double U=A.I*A.R;
-		return U;
+	
+	public double getI(){
+		return this.I;
 	}
-	public double Power() {		//Вычисляем мощность
-		PLUS A = this;
-		double W=A.I*A.voltage();
-		return W;
+	
+	public double voltage(){	
+		return this.I * this.R;
 	}
-	public void inSeries(PLUS B){ //Послед. соединение (входной параметр-вторая пара I,R, в итоге тут двуплюсник
-		PLUS A=this;
-		double U=A.voltage()+B.voltage();
-		double R=A.R+B.R;
-		System.out.println("При последовательном: U="+U+" R="+R);
+	
+	public double Power() {		
+		return this.I*this.voltage();
 	}
-	public void parallel(PLUS B){	//Параллельное соединение
-		PLUS A=this;
-		double I=A.I+B.I;
-		double R=(A.R*B.R)/(A.R+B.R);
-		System.out.println("При параллельном: I="+I+" R="+R);
+	
+	public void inSeries(PLUS B){ 
+		double U=this.voltage()+B.voltage();
+		double R=this.R+B.R;
+		System.out.println("РџСЂРё РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕРј: U="+U+" R="+R);
 	}
-	public void Show(){	//Просто показываем на экран
-		PLUS A=this;
-		System.out.println("Сила тока = "+I);
-		System.out.println("Сопротивление = "+R);
-		System.out.println("Напряжение = "+A.voltage());
-		System.out.println("Мощность = "+A.Power());
+	
+	public void parallel(PLUS B){	
+		double I=this.I+B.I;
+		double R=(this.R*B.R)/(this.R+B.R);
+		System.out.println("РџСЂРё РїР°СЂР°Р»Р»РµР»СЊРЅРѕРј:: I="+I+" R="+R);
+	}
+	
+	public void Show(){	
+		System.out.println("РЎРёР»Р° С‚РѕРєР° = "+getI());
+		System.out.println("РЎРѕРїСЂРѕС‚РёРІР»РµРЅРёРµ = "+getR());
+		System.out.println("РќР°РїСЂСЏР¶РµРЅРёРµ = "+voltage());
+		System.out.println("РњРѕС‰РЅРѕСЃС‚СЊ = "+Power());
 	}
 }

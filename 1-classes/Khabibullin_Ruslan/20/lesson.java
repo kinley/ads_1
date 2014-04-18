@@ -1,64 +1,58 @@
-//Отдельный класс lesson с методами
+//РћС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ lesson СЃ РјРµС‚РѕРґР°РјРё
 public class lesson {
-	private String FIO,WhatWhen,Where;		//Наши 4 переменные private (ФИО, ЧтоКогда,Где и номер группы)
+	private String FIO,WhatWhen,Where;		//РќР°С€Рё 4 РїРµСЂРµРјРµРЅРЅС‹Рµ private (Р¤РРћ, Р§С‚РѕРљРѕРіРґР°,Р“РґРµ Рё РЅРѕРјРµСЂ РіСЂСѓРїРїС‹)
 	private int nomer;
-	public lesson(){		
-		this.FIO="";
-		this.nomer=0;
-		this.WhatWhen="";
-		this.Where="";
-	}
-	private lesson(String FIO,int nomer,String WhatWhen,String Where){
+	public lesson(String FIO,int nomer,String WhatWhen,String Where){
 			this.FIO=FIO;
 			this.nomer=nomer;
 			this.WhatWhen=WhatWhen;
 			this.Where=Where;
 	}
-	public lesson create(String FIO,int nomer,String WhatWhen,String Where){	//Метод создания занятия
-			lesson A=new lesson();
-			A.FIO=FIO;
-			A.nomer=nomer;
-			A.WhatWhen=WhatWhen;
-			A.Where=Where;
-			return A;
+
+	public String get_Prepod(){		
+		return this.FIO;
 	}
-	public String get_Prepod(){		//Метод выводит имя преподавателя данного занятия
-		lesson A=this;
-		return A.FIO;
+	
+	public int get_nomer(){
+		return this.nomer;
 	}
-	public int checking(lesson B){		//Метод, проверяющий соотв. времени и места
-		lesson A=this;
-		if(A.WhatWhen.equals(B.WhatWhen)){	//Если время и место совп, то return 1
+	
+	public String get_WhatWhen(){
+		return this.WhatWhen;
+	}
+	
+	public String get_Where(){
+		return this.Where;
+	}
+	
+	public int checking(lesson B){		//РњРµС‚РѕРґ, РїСЂРѕРІРµСЂСЏСЋС‰РёР№ СЃРѕРѕС‚РІ. РІСЂРµРјРµРЅРё Рё РјРµСЃС‚Р°
+		if(get_WhatWhen().equals(B.WhatWhen)){	//Р•СЃР»Рё РІСЂРµРјСЏ Рё РјРµСЃС‚Рѕ СЃРѕРІРї, С‚Рѕ return 1
 			return 1;
 		}
 		else return 0;
 	}
-	public lesson merge(lesson B){		//Метод "Склеивания" занятий (место и преподаватели передаются в другое занятие)
-		lesson A=this;
-		A.Where=B.Where;
-		A.FIO=B.FIO;
-		return A;
+	
+	public lesson merge(lesson B){		//РњРµС‚РѕРґ "РЎРєР»РµРёРІР°РЅРёСЏ" Р·Р°РЅСЏС‚РёР№ (РјРµСЃС‚Рѕ Рё РїСЂРµРїРѕРґР°РІР°С‚РµР»Рё РїРµСЂРµРґР°СЋС‚СЃСЏ РІ РґСЂСѓРіРѕРµ Р·Р°РЅСЏС‚РёРµ)
+		this.Where=B.Where;
+		this.FIO=B.FIO;
+		return this;
 	}
-	public lesson fio_change(String stroka){	//Метод для изменения имени преподавателя
-		lesson A=this;
-		A.FIO=stroka;
-		return A;
+	
+	public lesson fio_change(String stroka){	//РњРµС‚РѕРґ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ РёРјРµРЅРё РїСЂРµРїРѕРґР°РІР°С‚РµР»СЏ
+		this.FIO=stroka;
+		return this;
 	}
-	public lesson sub_create(lesson C){	// Тут мы внутри одного занятия создаем второе, с аналогичыми
-		lesson A=this;					// данными, кроме ЧтоГде-этот параметр подхватывается из занятия C
-		lesson B=new lesson();
-		B.FIO=A.FIO;
-		B.nomer=A.nomer;
-		B.Where=A.Where;
-		B.WhatWhen=C.WhatWhen;
+	
+	public lesson sub_create(lesson C){	// РўСѓС‚ РјС‹ РІРЅСѓС‚СЂРё РѕРґРЅРѕРіРѕ Р·Р°РЅСЏС‚РёСЏ СЃРѕР·РґР°РµРј РІС‚РѕСЂРѕРµ, СЃ Р°РЅР°Р»РѕРіРёС‡С‹РјРё
+		lesson B=new lesson(this.FIO,this.nomer,this.Where,C.WhatWhen); //РґР°РЅРЅС‹РјРё, РєСЂРѕРјРµ Р§С‚РѕР“РґРµ-СЌС‚РѕС‚ РїР°СЂР°РјРµС‚СЂ РїРѕРґС…РІР°С‚С‹РІР°РµС‚СЃСЏ РёР· Р·Р°РЅСЏС‚РёСЏ C
 		return B;
 	}
-	public void show(){		//Просто вывод занятия
-		lesson A=this;
-		System.out.println("Имя = "+A.FIO);
-		System.out.println("Номер = "+A.nomer);
-		System.out.println("ЧтоКогда = "+A.WhatWhen);
-		System.out.println("Где = "+A.Where);
+	
+	public void show(){		//РІС‹РІРѕРґ 
+		System.out.println("Р¤РРћ = "+get_Prepod());
+		System.out.println("РќРѕРјРµСЂ = "+get_nomer());
+		System.out.println("Р§С‚Рѕ Рё РљРѕРіРґР° = "+get_WhatWhen());
+		System.out.println("Р“РґРµ = "+get_Where());
 	}
 }
 

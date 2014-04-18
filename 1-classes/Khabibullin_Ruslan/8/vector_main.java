@@ -2,27 +2,25 @@ import java.util.Scanner;
 public class vector_main {
 public static void main(String[] args) {
 	Scanner in = new Scanner(System.in);
-	vector A=new vector();
-	vector B=new vector();
-	System.out.println("Введите x и y");
+	System.out.println("Р’РІРµРґРёС‚Рµ x Рё y");
 	double x=in.nextDouble();
 	double y=in.nextDouble();
-	A=A.create(x, y);
-	System.out.println("Второй вектор");
-	System.out.println("Введите x и y");
+	vector A=new vector(x,y);
+	System.out.println("Р’С‚РѕСЂРѕР№ РІРµРєС‚РѕСЂ");
+	System.out.println("Р’РІРµРґРёС‚Рµ x Рё y");
 	double x1=in.nextDouble();
 	double y1=in.nextDouble();
-	B=B.create(x1, y1);	//Создали два вектора, с помощью метода .create(double x,double y)
-	A=A.summa(B);	//Вычисляем сумму двух векторов
-	System.out.print("Сумма: ");
-	A.show();	//Выводим
-	A=A.raznost(B);		//Вычисляем их разность и выводим
-	System.out.print("Разность: ");
+	vector B=new vector(x1,y1);
+	A=A.summa(B);	//Р’С‹С‡РёСЃР»СЏРµРј СЃСѓРјРјСѓ РґРІСѓС… РІРµРєС‚РѕСЂРѕРІ
+	System.out.print("РЎСѓРјРјР°: ");
+	A.show();	//Р’С‹РІРѕРґРёРј
+	A=A.raznost(B);		//Р’С‹С‡РёСЃР»СЏРµРј РёС… СЂР°Р·РЅРѕСЃС‚СЊ Рё РІС‹РІРѕРґРёРј
+	System.out.print("Р Р°Р·РЅРѕСЃС‚СЊ: ");
 	A.show();
-	System.out.println("Введите скаляр");	//Умножаем на скаляр и выводим
+	System.out.println("Р’РІРµРґРёС‚Рµ СЃРєР°Р»СЏСЂ");	//РЈРјРЅРѕР¶Р°РµРј РЅР° СЃРєР°Р»СЏСЂ Рё РІС‹РІРѕРґРёРј
 	int n=in.nextInt();
 	A=A.skalar(n);
 	A.show();
-	A.multiple(B);	//скалярное произведение, вывод сразу внутри метода
+	System.out.println("РЎРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ = "+A.multiple(B));	//СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
 	}
 }

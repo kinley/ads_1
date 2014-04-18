@@ -1,47 +1,39 @@
-//Отдельный класс vector с методами
+//РћС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ vector СЃ РјРµС‚РѕРґР°РјРё
 public class vector {
-	public double a,b;
-	public vector(){
-		this.a=0;
-		this.b=0;
-	}
+	private double a,b;
 	public vector(double a,double b){
 		this.a=a;
 		this.b=b;
 	}
-	public vector create(double a,double b){
-		vector A=new vector();
-		A.a=a;
-		A.b=b;
-		return A;
+
+	public double getA(){
+		return this.a;
 	}
-	public vector summa(vector B){ 		//Сумма двух векторов
-		vector A=this;
-		vector C=new vector();
-		C.a=A.a+B.a;
-		C.b=A.b+B.b;
+	
+	public double getB(){
+		return this.b;
+	}
+	
+	public vector summa(vector B){ 		//РЎСѓРјРјР° РґРІСѓС… РІРµРєС‚РѕСЂРѕРІ
+		vector C=new vector(this.a+B.a,this.b+B.b);
 		return C;
 	}
-	public vector raznost(vector B){		//Разность
-		vector A=this;
-		vector C=new vector();
-		C.a=B.a-A.a;
-		C.b=B.b-A.b;
+	
+	public vector raznost(vector B){		//Р Р°Р·РЅРѕСЃС‚СЊ
+		vector C=new vector(B.a-this.a,B.b-this.b);
 		return C;
 	}
-	public vector skalar(int n){	//Получив скаляр, умножаем на него вектор
-		vector A=this;
-		vector C=new vector();
-		C.a=A.a*n;
-		C.b=A.b*n;
+	
+	public vector skalar(int n){	//РџРѕР»СѓС‡РёРІ СЃРєР°Р»СЏСЂ, СѓРјРЅРѕР¶Р°РµРј РЅР° РЅРµРіРѕ РІРµРєС‚РѕСЂ
+		vector C=new vector(this.a*n,this.b*n);
 		return C;
 	}
-	public void multiple(vector B){ 		//Скалярное произведение двух векторов
-		vector A=this;
-		double rez=A.a*B.a+A.b*B.b;
-		System.out.println("Скалярное произведение векторов = "+rez);
+	
+	public double multiple(vector B){ 		//РЎРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РґРІСѓС… РІРµРєС‚РѕСЂРѕРІ
+		return this.a*B.a+this.b*B.b;
 	}
+	
 	public void show(){
-		System.out.println("X= "+a+"  Y= "+b);	//Просто вывод вектора
+		System.out.println("X= "+getA()+"  Y= "+getB());	//РџСЂРѕСЃС‚Рѕ РІС‹РІРѕРґ РІРµРєС‚РѕСЂР°
 	}
 }

@@ -1,41 +1,38 @@
 import java.util.Scanner;
 public class lesson_main {
 public static void main(String[] args) {
-	Scanner in = new Scanner(System.in);
-	lesson A=new lesson();		//Создаем две переменный типа lesson (см. класс lesson, и методы lesson)
-	lesson B=new lesson();
-	lesson C=new lesson();		//По заданию, третий формируется из первого, со временем второго занятия(lesson)
-	System.out.println("Введите имя преподавателя");	//Забиваем сначала 1-ое занятие (A), а потом и второе (B)
-	String FIO=in.nextLine();
-	System.out.println("Введите номер группы");
+	Scanner in = new Scanner(System.in);////РЎРѕР·РґР°РµРј РґРІРµ РїРµСЂРµРјРµРЅРЅС‹Р№ С‚РёРїР° lesson (СЃРј. РєР»Р°СЃСЃ lesson, Рё РјРµС‚РѕРґС‹ lesson)
+	System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ РїСЂРµРїРѕРґР°РІР°С‚РµР»СЏ");	//РџРѕ Р·Р°РґР°РЅРёСЋ, С‚СЂРµС‚РёР№ С„РѕСЂРјРёСЂСѓРµС‚СЃСЏ РёР· РїРµСЂРІРѕРіРѕ, СЃРѕ РІСЂРµРјРµРЅРµРј РІС‚РѕСЂРѕРіРѕ Р·Р°РЅСЏС‚РёСЏ(lesson)
+	String FIO=in.nextLine();//Р—Р°Р±РёРІР°РµРј СЃРЅР°С‡Р°Р»Р° 1-РѕРµ Р·Р°РЅСЏС‚РёРµ (A), Р° РїРѕС‚РѕРј Рё РІС‚РѕСЂРѕРµ (B)
+	System.out.println("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РіСЂСѓРїРїС‹");
 	String nomer1=in.nextLine();
 	int nomer=(int) Double.parseDouble(nomer1);
-	System.out.println("Введите ЧтоКогда");
+	System.out.println("Р’РІРµРґРёС‚Рµ Р§С‚РѕРљРѕРіРґР°");
 	String WhatWhen=in.nextLine();
-	System.out.println("Введите Где");
+	System.out.println("Р’РІРµРґРёС‚Рµ Р“РґРµ");
 	String Where=in.nextLine();
-	A=A.create(FIO, nomer, WhatWhen, Where);	//вызываем метод создания занятия lesson для переменной А
-	System.out.println("Введите имя преподавателя");
+	lesson A=new lesson(FIO,nomer,WhatWhen,Where); 
+	System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ РїСЂРµРїРѕРґР°РІР°С‚РµР»СЏ");
 	String FIO2=in.nextLine();
-	System.out.println("Введите номер группы");
+	System.out.println("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РіСЂСѓРїРїС‹");
 	String nomer3=in.nextLine();
 	int nomer2=(int) Double.parseDouble(nomer1);
-	System.out.println("Введите ЧтоКогда");
+	System.out.println("Р’РІРµРґРёС‚Рµ Р§С‚РѕРљРѕРіРґР°");
 	String WhatWhen2=in.nextLine();
-	System.out.println("Введите Где");
+	System.out.println("Р’РІРµРґРёС‚Рµ Р“РґРµ");
 	String Where2=in.nextLine();
-	B=B.create(FIO2, nomer2, WhatWhen2, Where2); //Тоже самое для второго занятия B
-	if(A.checking(B)==1){		//Если 2 занятия можно совместить, то "склеиваем" и показываем результат
+	lesson B=new lesson(FIO2, nomer2, WhatWhen2, Where2); ////РўРѕР¶Рµ СЃР°РјРѕРµ РґР»СЏ РІС‚РѕСЂРѕРіРѕ Р·Р°РЅСЏС‚РёСЏ B
+	if(A.checking(B)==1){		//Р•СЃР»Рё 2 Р·Р°РЅСЏС‚РёСЏ РјРѕР¶РЅРѕ СЃРѕРІРјРµСЃС‚РёС‚СЊ, С‚Рѕ "СЃРєР»РµРёРІР°РµРј" Рё РїРѕРєР°Р·С‹РІР°РµРј СЂРµР·СѓР»СЊС‚Р°С‚
 		A=A.merge(B);
 		A.show();
 	}
-	else {		// Иначе в занятий А будет новый преподаватель, затем показываем занятие A
-		System.out.println("Введите имя нового препода");
+	else {		// РРЅР°С‡Рµ РІ Р·Р°РЅСЏС‚РёР№ Рђ Р±СѓРґРµС‚ РЅРѕРІС‹Р№ РїСЂРµРїРѕРґР°РІР°С‚РµР»СЊ, Р·Р°С‚РµРј РїРѕРєР°Р·С‹РІР°РµРј Р·Р°РЅСЏС‚РёРµ A
+		System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ РЅРѕРІРѕРіРѕ РїСЂРµРїРѕРґР°");
 		String stroka=in.nextLine();
 		A=A.fio_change(stroka); 
 		A.show();
 	};
-	C=A.sub_create(B);		//Переменная С, созданная в занятий А со временем, как у занятия B
-	C.show();		//Показываем занятие С
+	lesson C=A.sub_create(B);		//РџРµСЂРµРјРµРЅРЅР°СЏ РЎ, СЃРѕР·РґР°РЅРЅР°СЏ РІ Р·Р°РЅСЏС‚РёР№ Рђ СЃРѕ РІСЂРµРјРµРЅРµРј, РєР°Рє Сѓ Р·Р°РЅСЏС‚РёСЏ B
+	C.show();		
 	}
 }

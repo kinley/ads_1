@@ -2,20 +2,18 @@ import java.util.Scanner;
 public class PLUS_MAIN {
 public static void main(String[] args) {
 	Scanner in = new Scanner(System.in);
-	PLUS A=new PLUS();
-	PLUS B=new PLUS();
-	System.out.println("Введите I и R");
+	System.out.println("Р’РІРµРґРёС‚Рµ I Рё R");
 	double I=in.nextDouble();
 	double R=in.nextDouble();
-	A=A.create(R, I);	//Создаем двуплюсник (см. файл PLUS)
-	A.Show();		//Выводим его (показав еще и напряжение и мощность)
-	System.out.println("Второе биполе");
-	System.out.println("Введите I и R");
+	PLUS A=new PLUS(I,R);	//РЎРѕР·РґР°РµРј РґРІСѓРїР»СЋСЃРЅРёРє (СЃРј. С„Р°Р№Р» PLUS)
+	A.Show();		//Р’С‹РІРѕРґРёРј РµРіРѕ (РїРѕРєР°Р·Р°РІ РµС‰Рµ Рё РЅР°РїСЂСЏР¶РµРЅРёРµ Рё РјРѕС‰РЅРѕСЃС‚СЊ)
+	System.out.println("Р’С‚РѕСЂРѕРµ Р±РёРїРѕР»Рµ");
+	System.out.println("Р’РІРµРґРёС‚Рµ I Рё R");
 	double I1=in.nextDouble();
 	double R1=in.nextDouble();
-	B=B.create(R1, I1);		
-	B.Show();		//Выводим второе биполе (тоже самое)
-	A.inSeries(B);		//При послед. соединений
-	A.parallel(B);		//При параллельном (каждый из этих методов выведет результат)
+	PLUS B=new PLUS(I1,R1);
+	B.Show();		//Р’С‹РІРѕРґРёРј РІС‚РѕСЂРѕРµ Р±РёРїРѕР»Рµ (С‚РѕР¶Рµ СЃР°РјРѕРµ)
+	A.inSeries(B);		//РџСЂРё РїРѕСЃР»РµРґ. СЃРѕРµРґРёРЅРµРЅРёР№
+	A.parallel(B);		//РџСЂРё РїР°СЂР°Р»Р»РµР»СЊРЅРѕРј (РєР°Р¶РґС‹Р№ РёР· СЌС‚РёС… РјРµС‚РѕРґРѕРІ РІС‹РІРµРґРµС‚ СЂРµР·СѓР»СЊС‚Р°С‚)
 }
 }
