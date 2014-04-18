@@ -1,20 +1,20 @@
-import java.util.*;
+import java.util.Scanner;
 
-//рекурсивно вычисляется факториал n, затем выводится на экран натуральный логарифм от n!
+// рекурсивное вычисление натурального логарифма от (n!)
 public class Task5 {
 
-	public static long Fac(long a) {
+	public static double logFac(int a) {
 		if (a == 0)
-			return 1;
+			return 0;
 		else
-			return a * Fac(a - 1);
+			return Math.log(a) + logFac(a - 1);
 	}
 
 	public static void main(String[] args) {
-		long n = 0;
+		int n = 0;
 		Scanner sc = new Scanner(System.in);
 		n = sc.nextInt();
-		System.out.print(Math.log(Fac(n)));
+		System.out.println(logFac(n));
 		sc.close();
 	}
 
