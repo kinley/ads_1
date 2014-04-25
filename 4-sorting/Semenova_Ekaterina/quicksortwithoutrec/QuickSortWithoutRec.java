@@ -4,7 +4,7 @@ public class QuickSortWithoutRec
 {
     private static Scanner in;
 
-	public static void Display(int x[], int n)
+	public static void WriteList(int x[], int n)
     {
         int i;
         System.out.println(" ");
@@ -13,29 +13,29 @@ public class QuickSortWithoutRec
         System.out.println(" ");
     }
 
-    public static int Partition(int x[], int lb, int ub )
+    public static int Sorting(int x[], int lb, int ub )
     {
-        int a, down, temp, up,pj;
+        int a, little, temp, bigger,pj;
         a=x[lb];
-        up=ub;
-        down=lb;
-        while(down<up)
+        bigger=ub;
+        little=lb;
+        while(little<bigger)
         {
-            while(x[down]<=a && down<up)
-                down=down+1;       
-            while(x[up]>a)
-                up=up-1;         
+            while(x[little]<=a && little<bigger)
+                little=little+1;       
+            while(x[bigger]>a)
+            	bigger=bigger-1;         
 
-            if(down<up)
+            if(little<bigger)
             {
-                temp=x[down]; 
-                x[down]=x[up];
-                x[up]=temp;
+                temp=x[little]; 
+                x[little]=x[bigger];
+                x[bigger]=temp;
             }
         }
-        x[lb]=x[up];
-        x[up]=a;
-        pj=up;
+        x[lb]=x[bigger];
+        x[bigger]=a;
+        pj=bigger;
         return (pj);
     }
 
@@ -49,7 +49,7 @@ public class QuickSortWithoutRec
             ub = (Integer)S.pop();
             lb = (Integer)S.pop();
             if (ub <= lb) continue;
-            int i = Partition(a, lb, ub);
+            int i = Sorting(a, lb, ub);
             if (i-lb > ub-i)
             {
                 S.push(lb);
@@ -67,10 +67,13 @@ public class QuickSortWithoutRec
 
     public static void main(String args[ ])
     {
-        int i,n=10;
-        int x[]=new int[10];
+        int i;
+        System.out.println("—колько чисел введете?");
         in = new Scanner(System.in);
-        System.out.println("¬ведите 10 чисел");
+        int n = in.nextInt();
+        int x[]=new int[n];
+        
+        System.out.println("¬ведите числа");
         for(i=0;i<n;i++)
             x[i] = in.nextInt();
         Quick(x,0,n-1);
