@@ -6,7 +6,7 @@ public class STACK
 		Symbol next;
 	}
 	
-	public void push(char Item){		//просто пушим в наш стэк(пушим в конец, это важно:))
+	public void push(char Item){		//РїСѓС€РёРј РІ РЅР°С€ СЃС‚СЌРє( РїСѓС€РёРј РІ РєРѕРЅРµС†, С‚Р°Рє СѓРґРѕР±РЅРµРµ РїСЂРѕРІРµСЂСЏС‚СЊ:))
 		Symbol paste=new Symbol();
 		paste.Item=Item;
 		Symbol step=first;
@@ -21,7 +21,7 @@ public class STACK
 			}
 		}
 	
-	public boolean check(){	//проверям на условие, если стэк содержит 03I203I, то это правильное выражение и заменяем ее на три
+	public boolean check(){	//РїРѕРІРµСЂСЏРµРј РЅР° РІС…РѕР¶РґРµРЅРёСЏ СЃС‚СЂРѕРєРё 03I203I, РµСЃР»Рё РѕРЅР° РµСЃС‚СЊ, С‚Рѕ РІС‹РІРѕРґРёРј 3 Рё true. Р•СЃР»Рё Р¶Рµ РµРµ РЅРµС‚ РёР»Рё РµСЃС‚СЊ С‡С‚Рѕ-С‚Рѕ РїРѕРјРёРјРѕ, С‚Рѕ false
 		Symbol step=first;
 		String checker="";
 		for(step=first;step!=null;step=step.next){
@@ -30,10 +30,10 @@ public class STACK
 		}
 		System.out.println(checker);
 		if(checker.equals("3")) return true;
-		else return false;		//оно не содержит искомого выражение, либо содержит что-то помимо
+		else return false;		//СЌС‚РѕР№ СЃС‚СЂРѕРєРё РЅРµС‚, РёР»Рё РµСЃС‚СЊ С‡С‚Рѕ-С‚Рѕ РєСЂРѕРјРµ РЅРµРµ
 	}
 	
-	public char pop(){		//просто отстреливаем весь стек
+	public char pop(){		//РїСЂРѕСЃС‚Рѕ РѕС‚СЃС‚СЂРµР»РёРІР°РµРј РЅР°С€ СЃС‚СЌРє
 		char Item=first.Item;
 		first=first.next;
 		return Item;
