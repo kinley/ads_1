@@ -34,8 +34,9 @@ public static void main(String[] args)
 						}
 					}
 					if(!tmp.equals("ERROR")){	//если "загон" в стэк произошел без ошибки то выполняем проверку на "заменяемость" на три, и выводим
-							System.out.println(st.check());
-							for(int i=0;i<stroka.length();i++) System.out.print(st.pop());
+						st.changing();		//производим "преобразование" стэка по условию
+						System.out.println(st.check());		//проверка преобразованного выражение, вывод true-выражение правильное, false-соотв непр.
+						st.print_Item();	//вывод(не pop, обычный вывод)
 					}
 					else System.out.println(tmp);		//произошла ошибка, поэтому так и выведем
 					}
