@@ -1,4 +1,4 @@
-import Java.lang.Math;
+import java.lang.Math;
 
 public class Complex {
 	// Класс, определяющий комплексное число в полярных (в первую очередь) координатах
@@ -36,7 +36,8 @@ public class Complex {
 	    public Complex subtr(Complex numb) {
 			numb.a = -numb.a;
 			numb.b = -numb.b;
-			this.sum(numb);
+			Complex result = this.sum(numb);
+			return result;
 	}
 	// Умножение
 	public Complex numb(Complex numb) {
