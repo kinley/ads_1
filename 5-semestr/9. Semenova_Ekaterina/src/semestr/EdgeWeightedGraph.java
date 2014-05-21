@@ -1,0 +1,173 @@
+package semestr;
+
+import java.util.Stack;
+
+public class EdgeWeightedGraph {
+	
+    private final int V;
+    private int E;
+    private Bag<Edge>[] adj;
+    
+    /**
+     * Инициализирует пустой взвешенный граф с V вершинами и 0 ребрами.
+     * param V количество вершин
+     * @throws java.lang.IllegalArgumentException если V < 0
+     */
+    public EdgeWeightedGraph(int V) {
+        if (V < 0) throw new IllegalArgumentException("Количество вершин не должно быть отрицательным");
+        this.V = V;
+        this.E = 0;
+        adj = (Bag<Edge>[]) new Bag[V];
+        for (int v = 0; v < V; v++) {
+            adj[v] = new Bag<Edge>();
+        }
+    }
+
+    /**
+     * Инициализирует случайный взвешенный граф с V вершинами и E ребрами.
+     * param V количество вершин
+     * param E количество ребер
+     * @throws java.lang.IllegalArgumentException если V < 0
+     * @throws java.lang.IllegalArgumentException если E < 0
+     */
+    public EdgeWeightedGraph(int V, int E) {
+        this(V);
+        if (E < 0) throw new IllegalArgumentException("Количество ребер не должно быть меньше нуля");
+        for (int i = 0; i < E; i++) {
+            int v = (int) (Math.random() * V);
+            int w = (int) (Math.random() * V);
+            double weight = Math.round(100 * Math.random()) / 100.0;
+            Edge e = new Edge(v, w, weight);
+            addEdge(e);
+        }
+    }
+
+    /**  
+     * Инициализация взвешенного графа с входного потока.
+     * Формат: количество вершин <em>V</em>,
+     * далее количество ребер <em>E</em>,
+     * далее пары вершин и вес ребер,
+     * каждая запись разделена пробелом.
+     * @param in входной поток
+     * @throws java.lang.IndexOutOfBoundsException если концы любого ребра не в заданном диапазоне
+     * @throws java.lang.IllegalArgumentException если число вершин или ребер отрицательно
+     */
+    public EdgeWeightedGraph(In in) {
+        this(in.readInt());
+        int E = in.readInt();
+        if (E < 0) throw new IllegalArgumentException("Число вершин или ребер не должно быть отрицательно");
+        for (int i = 0; i < E; i++) {
+            int v = in.readInt();
+            int w = in.readInt();
+            double weight = in.readDouble();
+            Edge e = new Edge(v, w, weight);
+            addEdge(e);
+        }
+    }
+
+    /**
+     * Инициализация нового взешенного графа которая является копией <tt>G</tt>.
+     * @param G взвешенный скопированный граф
+     */
+    public EdgeWeightedGraph(EdgeWeightedGraph G) {
+        this(G.V());
+        this.E = G.E();
+        for (int v = 0; v < G.V(); v++) {
+            // возвращает так чтобы матрица сежности была как в оригинале
+            Stack<Edge> reverse = new Stack<Edge>();
+            for (Edge e : G.adj[v]) {
+                reverse.push(e);
+            }
+            for (Edge e : reverse) {
+                adj[v].add(e);
+            }
+        }
+    }
+
+
+    /**
+     * Возращает количество вершин в графе.
+     */
+    public int V() {
+        return V;
+    }
+
+    /**
+     * Возвращает количество ребер в графе.
+     */
+    public int E() {
+        return E;
+    }
+
+    /**
+     * Добавляет неориентированные ребра <tt>e</tt> в взешенный граф.
+     * @param e ребро
+     * @throws java.lang.IndexOutOfBoundsException если обе конечные точки не между 0 и V- 1
+     */
+    public void addEdge(Edge e) {
+        int v = e.either();
+        int w = e.other(v);
+        if (v < 0 || v >= V) throw new IndexOutOfBoundsException("Вершины " + v + " не между 0 и " + (V-1));
+        if (w < 0 || w >= V) throw new IndexOutOfBoundsException("Вершины " + w + " не между 0 и " + (V-1));
+        adj[v].add(e);
+        adj[w].add(e);
+        E++;
+    }
+
+    /**
+     * Возвращает ребра созданные на вершинах <tt>v</tt>.
+     * @param v вершина
+     * @throws java.lang.IndexOutOfBoundsException если не 0 <= v < V
+     */
+    public Iterable<Edge> adj(int v) {
+        if (v < 0 || v >= V) throw new IndexOutOfBoundsException("vertex " + v + " is not between 0 and " + (V-1));
+        return adj[v];
+    }
+
+    /**
+     * Возвращает все ребра
+     * Для перебора всех ребер, используется:
+     * <tt>for (Edge e : G.edges())</tt>.
+     * @return все ребра как Iterable.
+     */
+    public Iterable<Edge> edges() {
+        Bag<Edge> list = new Bag<Edge>();
+        for (int v = 0; v < V; v++) {
+            int selfLoops = 0;
+            for (Edge e : adj(v)) {
+                if (e.other(v) > v) {
+                    list.add(e);
+                }
+                // Добавить только один экземпляр каждого самостоятельного цикла ( петли будут следовать друг за другом )
+                else if (e.other(v) == v) {
+                    if (selfLoops % 2 == 0) list.add(e);
+                    selfLoops++;
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * Возращает строковое представление графа.
+     * Этот метод затрагивет время, пропорциональное <em>E</em> + <em>V</em>.
+     * @return количество вершин <em>V</em>, далее количество ребер <em>E</em>,
+     *  далее следует список ребер
+     */
+    public String toString() {
+        String NEWLINE = System.getProperty("line.separator");
+        StringBuilder s = new StringBuilder();
+        s.append(V + " " + E + NEWLINE);
+        for (int v = 0; v < V; v++) {
+            s.append(v + ": ");
+            for (Edge e : adj[v]) {
+                s.append(e + "  ");
+            }
+            s.append(NEWLINE);
+        }
+        return s.toString();
+    }
+    
+  //Данный класс используется в главном классе Main, вызывающем чтение из файла и вывод остова, и главном классе KruskalMST, реализующем алгоритм Крускала
+
+}
