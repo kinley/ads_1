@@ -6,7 +6,12 @@
  */
 
 public class Tuna {
-    private Dictionary goodguys = new Dictionary(), badguys = new Dictionary();
+    private Dictionary goodguys, badguys;
+
+    public Tuna() {
+        this.goodguys = new Dictionary();
+        this.badguys = new Dictionary();
+    }
 
     public void favour(String friend) {
         goodguys.insert(friend);
@@ -29,4 +34,18 @@ public class Tuna {
             System.out.println("No information about " + subject);
         }
     }
+
+    //-----------------------------Methods for JUnit-----------------------------\\
+    public boolean reportGood(String subject) {
+        return goodguys.isContained(subject);
+    }
+
+    public boolean reportBad(String subject) {
+        return badguys.isContained(subject);
+    }
+
+    public boolean reportNoInform(String subject) {
+        return !goodguys.isContained(subject) && !badguys.isContained(subject);
+    }
+
 }

@@ -1,56 +1,62 @@
 /**
- * Словарь строк на основе DST-деревьев
- * Важное замечание: слова должны состоять из различных букв!
+ * Словарь строк на основе HashMap и DST-деревьев
  */
 public class Dictionary {
-    DSTNode root;
+    private SymbolTable names; // таблица имя-ключ(положительное целое число)
+    private int currentTablePosition; // номер следующего добавляемого в names имени
+    DSTNode root; // корень DST
+
+    public Dictionary() {
+        this.names = new SymbolTable();
+        this.currentTablePosition = 1;
+        this.root = null;
+    }
 
     private static class DSTNode {
-        char data;
+        int data; // ключ текущего узла
         private DSTNode left;
         private DSTNode right;
 
 
-        DSTNode() {
-            this.data = '\0';
+        public DSTNode() {
+            // Имена людей будут кодироваться только положительными натуральными числами
+            // 0 означает, что либо имя "выкинуто" из дерева, либо имени вовсе и не было
+            this.data = 0;
             this.left = null;
             this.right = null;
         }
     }
 
-    public void insert(String string) {
-        for (int i = 0; i < string.length(); i++) {
-            insertChar(string.charAt(i));
-        }
-    }
-
-    private void insertChar(char c) {
+    /**
+     * Добавление ключа в DST
+     */
+    private void insertPositionToDST(int pos) {
         if (root == null) {
             root = new DSTNode();
-            root.data = c;
+            root.data = pos;
         }
         else {
             DSTNode buf = root;
             boolean added = false;
 
             while (!added) {
-                if (c > buf.data) {
+                if (pos > buf.data) {
                     if (buf.right != null) {
                         buf = buf.right;
                     }
                     else {
                         buf.right = new DSTNode();
-                        buf.right.data = c;
+                        buf.right.data = pos;
                         added = true;
                     }
                 }
-                else if (c < buf.data) {
+                else if (pos < buf.data) {
                     if (buf.left != null) {
                         buf = buf.left;
                     }
                     else {
                         buf.left = new DSTNode();
-                        buf.left.data = c;
+                        buf.left.data = pos;
                         added = true;
                     }
                 }
@@ -61,42 +67,63 @@ public class Dictionary {
         }
     }
 
-    public void delete(String string) {
-        char c = string.charAt(0);
-        if (root != null) {
-            DSTNode buf = root;
+    /**
+     * Добавление имени в Dictionary
+     * (добавление имени в names, связывание имени с ключом и добавление ключа в DST)
+     */
+    public void insert(String name) {
+        names.insert(name, currentTablePosition);
+        insertPositionToDST(currentTablePosition++);
+    }
 
-            while (buf != null) {
-                if (c > buf.data) {
-                    buf = buf.right;
-                } else if (c < buf.data) {
-                    buf = buf.left;
-                } else {
-                    buf.data = '\0'; // HACK
-                    return;
+    /**
+     * "Удаление" элемента из DST
+     */
+    public void delete(String name) {
+        if (names.getValue(name) != 0) {
+            int pos = names.getValue(name);
+
+            if (root != null) {
+                DSTNode buf = root;
+                while (buf != null) {
+                    if (pos > buf.data) {
+                        buf = buf.right;
+                    }
+                    else if (pos < buf.data) {
+                        buf = buf.left;
+                    }
+                    else {
+                        // TODO
+                        // HACK
+                        // Элемент не удаляется из names, не удаляется из DST
+                        buf.data = 0;
+                        return;
+                    }
                 }
             }
         }
     }
 
-    public boolean isContained(String string) {
-        boolean b = isContainedChar(string.charAt(0));
-        for (int i = 1; i < string.length() && b; i++) {
-            b = isContainedChar(string.charAt(i));
-        }
-        return b;
+    /**
+     * Содержится ли данное имя в Dictionary
+     */
+    public boolean isContained(String name) {
+        return names.getValue(name) != 0 && isContainedPositionInDST(names.getValue(name));
     }
 
-    private boolean isContainedChar(char c) {
+    /**
+     * Содержится ли данный ключ в DST
+     */
+    private boolean isContainedPositionInDST(int pos) {
         if (root == null) {
             return false;
         } else {
             DSTNode buf = root;
 
             while (buf != null) {
-                if (c > buf.data) {
+                if (pos > buf.data) {
                     buf = buf.right;
-                } else if (c < buf.data) {
+                } else if (pos < buf.data) {
                     buf = buf.left;
                 } else {
                     return true;
@@ -104,9 +131,5 @@ public class Dictionary {
             }
             return false;
         }
-    }
-
-    Dictionary() {
-        this.root = null;
     }
 }
