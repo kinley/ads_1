@@ -1,24 +1,23 @@
 import java.util.Scanner;
 public class LIST_MAIN {
 	public static void main(String[] args) {
-		LIST<Integer> node= new LIST();
-		node.putHead(13);		//С‚СѓС‚ РїСЂРѕСЃС‚Рѕ РґРµРјРѕРЅСЃС‚СЂР°С†РёСЏ РјРµС‚РѕРґРѕРІ РєР»Р°Р°СЃСЃР° РЅР° РїСЂРёРґСѓРјР°РЅРЅС‹С… РјРЅРѕСЋ С‡РёСЃР»Р°С…...РЅРёС‡РµРіРѕ Р±РѕР»РµРµ)
-		node.putEnd(133);	//РІСЃС‚Р°РІРєР° РІ РєРѕРЅРµС†
-		node.putHead(25);		//РІ РЅР°С‡Р°Р»Рѕ СЃРѕРѕС‚РІ.
-		node.putEnd(50);
-		node.printNode();	//РІС‹РІРѕРґ
-		System.out.println();		//СЌС‚Рѕ...РїРµСЂРµРІРѕРґ РЅР° СЃР»РµРґ. СЃС‚СЂРѕРєСѓ. РџСЂРѕСЃС‚Рѕ..Рё РїРѕ РµРІСЂРµР№СЃРєРё
-		node.deleteFirst();	//СѓРґР°Р»РµРЅРёРµ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СЃРїРёСЃРєР°
-		node.deleteLast();		//РїРѕСЃР»РµРґРЅРµРіРѕ
-		node.printNode();	//РІС‹РІРѕРґ РЅР°С€РµРіРѕ РёРЅРІР°Р»РёРґР°
-		System.out.println();		//РµС‰Рµ РѕРґРёРЅ РјРѕР№ РїРµСЂРµРІРѕРґ РЅР° СЃР»РµРґ. СЃС‚СЂРѕРєСѓ
-		node.deleteToIndex(1);		//СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РїРѕ РµРіРѕ РёРЅРґРµРєСЃСѓ
-		node.printNode();		//РІС‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р°
+		LIST<Integer> node= new LIST(5);
+		node.putHead(13);	//вставка в голову числа(работаем с int)
+		node.putEnd(133);	//вставка в конец
+		node.putHead(25);	//переписали голову(повторно добавили)
+		node.putEnd(50);	
+		node.printNode();	//вывод
 		System.out.println();
-		System.out.println(node.printToIndex(1));		//РІС‹РІРѕРґ РїРѕ РёРЅРґРµРєСЃСѓ
-		node.pasteToIndex(334, 1);	//РІСЃС‚Р°РІРєР° СЌР»РµРјРµРЅС‚Р° 334(С†С‹С„СЂР°) РЅР° РїРµСЂРІРѕРµ РјРµСЃС‚Рѕ
+		node.deleteFirst();	//удаляем первый элемент(голова переписывается)
+		node.deleteLast();	//удаляем последний элемент
 		node.printNode();
 		System.out.println();
-		System.out.println(node.Size());	//РІС‹РІРѕРґ СЂР°Р·РјРµСЂР° РЅР°С€РµРіРѕ Р»РёСЃС‚Р°
+		node.deleteToIndex(1);	//проверка удаления по индексу
+		node.printNode();
+		System.out.println();
+		System.out.println(node.printToIndex(1));	//вывод по индексу
+		node.printNode();
+		System.out.println();
+		System.out.println(node.Size());	//количество элементов
 	}
 }

@@ -11,14 +11,16 @@ public class LIST<T> {
 	}
 	
 	public LIST(T Item){
-		this.Item=Item;
-		this.next=null;
-		this.prev=null;
+		LIST<T> paste=new LIST();
+		paste.Item=Item;
+		this.head=paste;
+		
 	}
 	
 	
 	public void putEnd(T Item){		//Вставка в список
-		LIST<T> element=new LIST<>(Item);
+		LIST<T> element=new LIST();
+		element.Item=Item;
 		LIST<T> step=head;
 		if(head==null){
 			element.next=head;
@@ -35,7 +37,8 @@ public class LIST<T> {
 	}
 	
 	public void putHead(T Item){	//вставка элемента в голову
-		LIST<T> element=new LIST(Item);
+		LIST<T> element=new LIST();
+		element.Item=Item;
 		element.next=head;
 		element.prev=null;
 		if(head!=null) head.prev=element;
@@ -92,34 +95,6 @@ public class LIST<T> {
 		}
 	}
 	
-	public void pasteToIndex(T c,int i){		//Вставка в i-ое место записи
-		LIST<T> element=head;
-		LIST<T> step=head;
-		LIST<T> paster=new LIST(c);
-		int counter=0;
-		while(element!=null){
-			counter++;
-			if(counter==i){
-				if(i==1){
-					paster.next=head;
-					paster.prev=null;
-					head.prev=paster;
-					head=paster;
-				}
-				else{
-					step.next=paster;
-					element.prev=paster;
-					paster.prev=step;
-					paster.next=element;
-				}
-					break;
-			}
-			else{
-				step=element;
-				element=element.next;
-			}
-		}
-	}
 	
 	public void printNode(){		//просто вывод всей записи
 		LIST<T> step=head;
