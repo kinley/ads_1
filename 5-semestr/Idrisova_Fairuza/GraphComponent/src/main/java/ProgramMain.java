@@ -1,5 +1,3 @@
-package AlgDS.Sem1.GraphComponent;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,13 +9,15 @@ public class ProgramMain {
 
     public static void main(String[] args) throws IOException {
 
-        Scanner sc = new Scanner(new File("input.txt"));
-        PrintWriter pw = new PrintWriter(new File("output.txt"));
+        Scanner sc = new Scanner(new File("src/input1.txt"));
+        //Scanner sc = new Scanner(System.in);
+        PrintWriter pw = new PrintWriter(new File("src/output.txt"));
+        //PrintWriter pw = new PrintWriter(System.out);
         TextParser textParser = new TextParser(sc, pw);                  //работа с файлами
 
+        System.out.println("Введите количество вершин в графе:");
         Graph G = new Graph(textParser);                                //создаем граф
         Stack<Integer> st = new Stack();
-//        G.view(textParser);
 
         DoubComp Comp = new DoubComp(G);
         st = Comp.MakeComp();
@@ -40,7 +40,7 @@ public class ProgramMain {
                 }
             }
         }
-
+        System.out.println(Comp.getCountCom());
 
         pw.close();
         sc.close();

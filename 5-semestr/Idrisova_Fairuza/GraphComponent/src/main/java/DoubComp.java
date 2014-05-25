@@ -1,5 +1,3 @@
-package AlgDS.Sem1.GraphComponent;
-
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -9,15 +7,18 @@ public class DoubComp {
     int[] lower;
     int[] father;
     int Counter;
-    Stack<Integer> st;       //здесь будет ребра компонент;
+    Stack<Integer> st;       //здесь будут ребра компонент;
     Graph G;
     int GV;
- //   int w;
+    int countCom;
 
-   public Stack<Integer> MakeComp(){
-       dfsCD(1);
-       return st;
-   }
+    public Stack<Integer> MakeComp(){
+        return st;
+    }
+
+    public int getCountCom() {
+        return countCom;
+    }
 
 
     public DoubComp(Graph G) {
@@ -29,6 +30,8 @@ public class DoubComp {
         lower = new int[GV];
         father = new int[GV];
         Counter = 1;
+        countCom = 0;
+        dfsCD(1);
     }
 
     public void dfsCD(int v) {
@@ -57,13 +60,14 @@ public class DoubComp {
                 {
                     //двусвязная компонента найдена.
                     st.push(-1);  //разделитель компонент. выведем одим стеком.
+                    countCom++;
                     lower[v]=Math.min(lower[w],lower[v]);
 
                 }
             }
-                else
-                    if ((father[v]!=w))
-                        lower[v]=Math.min(lower[v],dfsNum[w]);
+            else
+            if ((father[v]!=w))
+                lower[v]=Math.min(lower[v],dfsNum[w]);
         }
     }
 

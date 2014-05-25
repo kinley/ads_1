@@ -1,16 +1,12 @@
-package AlgDS.Sem1.GraphComponent;
-
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Graph<Item> {
     private final int V; //количество вершин
     private int E;       //количество ребер
-
-
-
     private List<Integer>[] AllV;  //списки смежных вершин
 
     public Graph(int V)      //конструктор с параметром-число вершин
@@ -25,7 +21,9 @@ public class Graph<Item> {
 
     public Graph(TextParser text) throws IOException {
         this(text.readInt());        //чтение V и создание графа
+        System.out.println("Введите количество ребер в графе:");
         int E = text.readInt();
+        System.out.println("Введите ребра(не повторяя симметричные): в строке вершины одного ребра, через пробел:");
         for (int i = 0; i < E; i++) {
             //добавляем ребро
             int v = text.readInt();
@@ -52,14 +50,15 @@ public class Graph<Item> {
         E++;
     }
 
-    public void view(TextParser p) throws IOException {
-        for (int i = 1; i <= V; i++){
-            p.print(i+": ");
-                for(Iterator<Integer> j = AllV[i].iterator(); j.hasNext();)
-                    p.print(j.next());
-            p.println();
-        }
-    }
+//    public void view(TextParser p) throws IOException {
+//        for (int i = 1; i <= V; i++){
+//            p.print(i+": ");
+//                for(Iterator<Integer> j = AllV[i].iterator(); j.hasNext();)
+//                    p.print(j.next());
+//            p.println();
+//        }
+//    }
+
 
 
 }
