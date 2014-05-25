@@ -77,4 +77,24 @@ public class LegislatorLinkList {
             System.out.println(node.item);
         }
     }
+
+    // Test
+    public static void main(String[] args) {
+        LegislatorLinkList list = new LegislatorLinkList();     // Создание списка
+        Legislator legislator = new Legislator("Name");
+
+        list.add(legislator);
+        list.add(new Legislator("Ben"));
+        list.add(new Legislator("Ben1"));
+        list.add(new Legislator("Ben2"));
+
+        list.printList();
+
+        System.out.println(list.isEmpty());
+        System.out.println(list.contains(legislator));
+
+        list.delete(legislator);
+
+        list.printList();
+    }
 }

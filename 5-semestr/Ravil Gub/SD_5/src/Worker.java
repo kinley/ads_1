@@ -1,4 +1,10 @@
-import java.util.StringTokenizer;
+/**
+ * Основная программа
+ * Для упрвления описываемой базы данных при вводе имен законодателей
+ * будем использовать односимвольные команды, за символом команды идет
+ * имя законодателя.
+ * Данные читаются из текстового файла
+ */
 
 public class Worker {
 
@@ -19,14 +25,14 @@ public class Worker {
             else if(a == 'U'){
                 tuna.unfavor(legislator);
             }
+            else if(a == '?'){
+                tuna.report(legislator);
+            }
+            else {
+                System.out.println("Неизвестная команда");
+            }
         }
-
-        tuna.printGoodGuys();
-
         System.out.println();
-
-        tuna.printBadGuys();
-
     }
 
 }
