@@ -34,7 +34,7 @@ public class DoubCompTest {
         int res3 = comp3.getCountCom();
 
 
-        Assert.assertEquals(res1, 3);
+        Assert.assertEquals(res1, 4);
         Assert.assertEquals(res2,5);
         Assert.assertEquals(res3,1);
     }

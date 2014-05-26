@@ -8,12 +8,13 @@ public class DoubComp {
     int[] father;
     int Counter;
     Stack<Integer> st;       //здесь будут ребра компонент;
+    Stack<Integer> st1;
     Graph G;
     int GV;
     int countCom;
 
     public Stack<Integer> MakeComp(){
-        return st;
+        return st1;
     }
 
     public int getCountCom() {
@@ -24,6 +25,7 @@ public class DoubComp {
     public DoubComp(Graph G) {
         this.G = G;
         st = new Stack();
+        st1 = new Stack();
         GV = G.getV() + 1;
         mark = new boolean[GV];
         dfsNum = new int[GV];
@@ -31,13 +33,17 @@ public class DoubComp {
         father = new int[GV];
         Counter = 1;
         countCom = 0;
-        dfsCD(1);
+        for (int i=1;i<GV;i++) {
+            if(mark[i]==false) {
+                Counter = 1;
+                dfsCD(i);
+            }
+        }
     }
 
     public void dfsCD(int v) {
         mark[v] = true;  //старый
         dfsNum[v] = Counter;
-
         Counter++;
         lower[v] = dfsNum[v];
 
@@ -59,15 +65,28 @@ public class DoubComp {
                 if (lower[w]>=dfsNum[v])
                 {
                     //двусвязная компонента найдена.
-                    st.push(-1);  //разделитель компонент. выведем одим стеком.
+                     //разделитель компонент. выведем одим стеком.
                     countCom++;
+                    int w1=0;
+                    int v1=0;
+
+                    while (( v1 != v) && (w1 != w)) {
+                        w1 = st.pop();
+                        v1 = st.pop();
+                        st1.push(v1);
+                        st1.push(w1);
+                    }
+                    st1.push(-1);
                     lower[v]=Math.min(lower[w],lower[v]);
 
                 }
             }
             else
-            if ((father[v]!=w))
+             if ((father[v]!=w) && (dfsNum[w]<dfsNum[v]) ){
+                 st.push(v);
+                 st.push(w);
                 lower[v]=Math.min(lower[v],dfsNum[w]);
+             }
         }
     }
 
