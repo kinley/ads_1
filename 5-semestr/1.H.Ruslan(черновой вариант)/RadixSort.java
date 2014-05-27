@@ -1,12 +1,15 @@
 public class RadixSort {
-	 private static final int BITS_PER_BYTE =   8;	 //константы класса
+	 
+	private static final int BITS_PER_BYTE =   8;	 //константы класса
 	 private static final int BITS_PER_INT  =  32;   // в JAVA int  содержит 32  бита 
 	 private static final int R             = 256;   // в ASCII таблице алфавит
 	 private static final int CUTOFF        =  15;   // для сортировки вставкой
 	 
+	 
 	 private String[] input;			//входная строка, позже ее и ретерним
 	 private String[] created;			//вспомогательная строка
 	 private int length,d;				//длина строки, и переменная для поразрядной сортировки
+	 
 	 
 	 public RadixSort(String[] input){		//просто конструктор
 		this.length=input.length;
@@ -15,15 +18,19 @@ public class RadixSort {
 		this.d=0;
 	 }
 	 
+	 
 	 public void Sort(){		//метод сортировки (через процедуру делать было удобнее, ибо с ООП слабо 
 		 Sort(this.input,0,this.length-1,0,this.created);	//передаем строку, начало ее, конец, индекс(для начала) и всп. строку
 	 }
 	 
-	 public void Print(){ //просто вывод строки(результат)
-		 for(int i=0;i<this.length;i++){
-			 System.out.println(input[i]);
-		 }
-	 }
+	 
+	 public void Print(){ //просто вывод строки(результат) в файл output.txt
+		 Out out = new Out("output.txt");
+	     for(int i=0;i<this.length;i++){
+			 				out.println(input[i]);
+	     		}
+	 		}
+	 
 	 
 	 private static int charAt(String s, int d) {	//возвращает символ из стринга, -1 если d=s.length 
 	        assert d >= 0 && d <= s.length();
