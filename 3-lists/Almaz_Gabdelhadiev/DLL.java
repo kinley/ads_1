@@ -143,13 +143,6 @@ public class DLL<T> {
         }
     }
 
-    public void iterable(){
-        Node<T> node = head;
-        while(node!= null){
-            node = node.getNext();
-        }
-    }
-
     public T getEndData(){
         if (isEmpty()){
             throw new RuntimeException("Appeal to a nonexistent element!");
