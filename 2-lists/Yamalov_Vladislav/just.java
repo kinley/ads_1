@@ -1,22 +1,19 @@
 package just;
 
 
-
 import java.util.Scanner;
 
 
 public class just {
 	public static Node head,last,w;
 	public static Node position;
-	public static Node x,n,p,o_bracket,c_bracket,o_bracket1,c_bracket1;
+	public static Node x,n,p;
 	public static int z;
 	
 	public static void main(String[] args){
 		just sp= new just();
 		sp.init();
-		sp.count();
-		for(int i=0;i<z;i++){
-		sp.machine();}
+		sp.machine();
 		sp.print();
 	}
 	
@@ -52,60 +49,165 @@ public class just {
 		}
 	}
 	
-	public void count(){
+	
+	public void machine(){
+		just sp=new just();
 		Node root=head;
-		z=0;
-		while (root!=null){
-			p=root.prev;
-			n=root.next;
-			if(root.value=='+'||root.value=='-'||root.value=='*'||root.value=='/'
-					&&p.value==')'&&n.value=='('){
-				z++;			
+		while(root!=null){
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ë'){
+					 if(root.next.next!=null)if(root.next.next.value=='à'){
+						 if(root.next.next.next!=null)if(root.next.next.next.value=='ï'){
+							 if(root.next.next.next.next!=null)if(root.next.next.next.next.value=='à'){
+								 root.next.value='ï';
+								 root.next.next.value='à';
+								 root.next.next.next.value='ë';
+								 root.next.next.next.next.value='*';
+								 sp.remove1(root);
+							 }
+						 }
+					 }
+				 }
+			 }
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ë'){
+					 if(root.next.next!=null)if(root.next.next.value=='à'){
+						if(root.next.next.next==null){
+							sp.remove1(root.next.next);
+							sp.remove1(root.next);
+						}
+					 }
+				 }
 			}
-		root=root.next;
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ë'){
+					 if(root.next.next!=null)if(root.next.next.value=='à'){
+						if(root.next.next.next!=null)if(root.next.next.next.value!='ï'){
+							sp.remove1(root.next.next);
+							sp.remove1(root.next);
+						}
+					 }
+				 }
+			}
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ë'){
+					 if(root.next.next!=null)if(root.next.next.value=='à'){
+						if(root.next.next.next!=null)if(root.next.next.next.value=='ï')
+						if(root.next.next.next.next==null){
+							sp.remove1(root.next.next);
+							sp.remove1(root.next);
+						}
+					 }
+				 }
+			}
+			 
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ï'){
+					 root.value='ï';
+					 root.next.value='è';
+					 sp.add(root.next, 'ë');
+					 sp.add(root.next.next, 'à');
+					 sp.add(root.next.next.next, '*');
+				 }
+			}
+			 
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='à'){
+					 root.value='ï';
+					 root.next.value='ë';
+					 sp.add(root.next, 'è');
+					 sp.add(root.next.next, '*');
+				 }
+			}
+			 
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ë'){
+					 if(root.next.next==null){
+						 root.value='ë';
+						 root.next.value='è';
+						 sp.add(root.next, 'ï');
+						 sp.add(root.next.next, 'à');
+						 sp.add(root.next.next.next, '*');
+					 }
+				 }
+			}
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='ë'){
+					 if(root.next.next!=null)if(root.next.next.value!='à'){
+						 root.value='ë';
+						 root.next.value='è';
+						 sp.add(root.next, 'ï');
+						 sp.add(root.next.next, 'à');
+						 sp.add(root.next.next.next, '*');
+					 }
+				 }
+			}
+			 
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value=='è'){
+					 root.value='.';
+					 sp.remove1(root.next);
+					 break;
+				 }
+			}
+			 
+			 if(root.value=='*'){
+				 if(root.next!=null)if(root.next.value!='ë')if(root.next.value!='è')
+				 if(root.next.value!='à')if(root.next.value!='ï'){
+					 root.value=' ';
+					 sp.add(root, 'è');
+				 }
+			}
+			 if(root.value=='*'){
+				 if(root.next==null){
+					 root.value=' ';
+					 sp.add(root, 'è');
+				 }
+			}
+			 
+			 if(root.value==' '){
+				 root.value='*';}
+			 
+			 root=root.next;
 		}
 	}
-	public void machine(){
-		Node root=head; int bracket=0;
-		 
-		while (root!=null){
-			p=root.prev;
-			n=root.next;
-			if(root.value=='+'||root.value=='-'||root.value=='*'||root.value=='/'){
-					if(p.value==')'&&n.value=='('){
-				position=root;
-				break;
-				
-			}}
-		root=root.next;
+	
+	public void add(Node root,char c){
+		if(root==null){
+			Node p=last;
+			Node element=new Node();
+			element.prev=last;
+			element.next=null;
+			element.value=c;
+			last=element;
+			
 		}
-		root=position;
-		while(root!=null){
-			if(root.value=='('){bracket++; if(bracket==1){o_bracket1=root;}}
-			if(root.value==')'){bracket--; if(bracket==0){c_bracket1=root;break;}}
-			root=root.next;
-		}
-		c_bracket1.value=position.value;
-		root=position;
-		bracket=0;
-		while(root!=null){
-			if(root.value==')'){bracket++; if(bracket==1){c_bracket=root;}}
-			if(root.value=='('){bracket--; if(bracket==0){o_bracket=root;break;}}
-			root=root.prev;
-			}
-		just sp=new just();
-		sp.remove1(o_bracket);
-		sp.remove1(c_bracket);
-		sp.remove1(position);
-		sp.remove1(o_bracket1);
+		n=root.next;
+		Node element=new Node();
+		root.next=element;
+		element.prev=root;
+		element.next=n;
+		element.value=c;
 	}
 	
 	
 	public void remove1(Node p){
+		if(p==head){
+			Node n=p.next;
+			head=n;
+			head.prev=null;
+		}else{
+		if(p==last){
 		Node n=p.prev;
-		Node l=p.next;
-		n.next=l;
-		l.prev=n;
+		last=n;
+		last.next=null;
+		}else{
+			Node n=p.prev;
+			Node l=p.next;
+			n.next=l;
+			l.prev=n;
+		}
+	}
 	}
 }
 
