@@ -2,51 +2,51 @@ package class_18;
 
 
 
-class parallParam{//Описываем класс параллелограмма
+class parallParam{//РћРїРёСЃС‹РІР°РµРј РєР»Р°СЃСЃ РїР°СЂР°Р»Р»РµР»РѕРіСЂР°РјРјР°
 	
-	// Свойства класса
-	public double d1;// Большая диагональ
-	public double d2;// Малая диагональ
-	public double ugol;// Меньший угол между диагоналями
-	public double x;// Ширина
-	public double y;// Длина
-	public double u1;// Острый угол парал.
-	public double u2;// Тупой угол парал.
+	// РЎРІРѕР№СЃС‚РІР° РєР»Р°СЃСЃР°
+	public double d1;// Р‘РѕР»СЊС€Р°СЏ РґРёР°РіРѕРЅР°Р»СЊ
+	public double d2;// РњР°Р»Р°СЏ РґРёР°РіРѕРЅР°Р»СЊ
+	public double ugol;// РњРµРЅСЊС€РёР№ СѓРіРѕР» РјРµР¶РґСѓ РґРёР°РіРѕРЅР°Р»СЏРјРё
+	public double x;// РЁРёСЂРёРЅР°
+	public double y;// Р”Р»РёРЅР°
+	public double u1;// РћСЃС‚СЂС‹Р№ СѓРіРѕР» РїР°СЂР°Р».
+	public double u2;// РўСѓРїРѕР№ СѓРіРѕР» РїР°СЂР°Р».
 	
-	// Методы класса
-	// Создать парал.
+	// РњРµС‚РѕРґС‹ РєР»Р°СЃСЃР°
+	// РЎРѕР·РґР°С‚СЊ РїР°СЂР°Р».
 	public parallParam(double a, double b, double c){
 		d1 = a;
 		d2 = b;
 		ugol = c;
-		//Выводим на экран значения
+		//Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ Р·РЅР°С‡РµРЅРёСЏ
 		System.out.println(d1);
 		System.out.println(d2);
 		System.out.println(ugol);
 	}
 	
-	// Длины сторон
+	// Р”Р»РёРЅС‹ СЃС‚РѕСЂРѕРЅ
 	public void lengthSides(){
 		x = Math.sqrt(Math.pow( d1, 2 ) + Math.pow( d2, 2 ) - 2*d1*d2*Math.cos(ugol))/2;
 		y = Math.sqrt(Math.pow( d1, 2 ) + Math.pow( d2, 2 ) + 2*d1*d2*Math.cos(ugol))/2;
-		//Выводим на экран значения
+		//Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ Р·РЅР°С‡РµРЅРёСЏ
 		System.out.println(x);
 		System.out.println(y);
 	}
-	// Углы
+	// РЈРіР»С‹
 	public void angles(){
 		u1 = Math.acos((Math.pow(x, 2)+Math.pow(y, 2)-Math.pow(d2, 2))/(2*x*y));
 		u1 = 180 - (180 / Math.PI) * u1;
 		u2 = 180 - u1;
-		//Выводим на экран значения
+		//Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ Р·РЅР°С‡РµРЅРёСЏ
 		System.out.println(u1);
 		System.out.println(u2);
 	}
-	// "Сжатие вытягивание"
+	// "РЎР¶Р°С‚РёРµ РІС‹С‚СЏРіРёРІР°РЅРёРµ"
 	public void xysize(double k1, double k2){
 		d1 = d1*k1;
 		d2 = d2*k2;
-		//Выводим на экран значения
+		//Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ Р·РЅР°С‡РµРЅРёСЏ
 		System.out.println(d1);
 		System.out.println(d2);
 	}
@@ -54,7 +54,7 @@ class parallParam{//Описываем класс параллелограмма
 	public void area(){
 		double ar;
 		ar = x*y* Math.sin(u1);
-		//Выводим на экран значения
+		//Р’С‹РІРѕРґРёРј РЅР° СЌРєСЂР°РЅ Р·РЅР°С‡РµРЅРёСЏ
 		System.out.println(ar);
 	}
 }
@@ -64,17 +64,17 @@ public class parall {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		parallParam A= new parallParam(2,8,30);
-		System.out.println("-----------Длины------------");
+		System.out.println("-----------Р”Р»РёРЅС‹------------");
 		A.lengthSides();
-		System.out.println("-----------Углы------------");
+		System.out.println("-----------РЈРіР»С‹------------");
 		A.angles();
-		System.out.println("-----------Площадь------------");
+		System.out.println("-----------РџР»РѕС‰Р°РґСЊ------------");
 		A.area();
-		System.out.println("-----------Растяжение------------");
+		System.out.println("-----------Р Р°СЃС‚СЏР¶РµРЅРёРµ------------");
 		A.xysize(2,2);
-		System.out.println("-----------Новые значения сторон------------");
+		System.out.println("-----------РќРѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ СЃС‚РѕСЂРѕРЅ------------");
 		A.lengthSides();
-		System.out.println("-----------Новая площадь------------");
+		System.out.println("-----------РќРѕРІР°СЏ РїР»РѕС‰Р°РґСЊ------------");
 		A.area();
 		System.out.println("-----------------------");
 	}

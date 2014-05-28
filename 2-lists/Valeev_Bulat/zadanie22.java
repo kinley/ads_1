@@ -29,21 +29,30 @@ import java.io.IOException;
                     N++;
             }
             public void search(){
+            	Node prev=top;
             	for (Node i = top; i!=null; i=i.next){
                     //System.out.print(i.data + " ");
                     String k = (String) i.data;
                     
                     if(k.charAt(0)=='z'){
-                    	Node old = top;
-                        top = new Node();
-                        Item item=(Item) ";";
-                        top.data = item;
-                        top.next = i;
-                        top.prev = i.next;
+                    	if(prev==top){
+                    		Node paste=new Node();
+                    		paste.data=(Item)"!";
+                    		paste.next=top;
+                    		top=paste;
+                    		
+                    	}
+                    	else{
+                    	Node paste=new Node();
+                    	paste.data=(Item) "!";
+                    	paste.next=i;
+                    	prev.next=paste;
+                    	}
+                    }
+                    prev=i;
                     //System.out.print(k.charAt(0) + " ");
                     }
                 }
-            }
 
             public Item pop(){
                   Item item = top.data;
@@ -66,15 +75,19 @@ import java.io.IOException;
             	zadanie22 <String> s = new zadanie22<String>();
             	zadanie22 <String> UnEven = new zadanie22<String>();
             	zadanie22 <String> Even = new zadanie22<String>();
-            	final Scanner r = new Scanner(new File("input.txt"));
+            	/*final Scanner r = new Scanner(new File("input.txt"));
         		while (r.hasNext()) {
                     String k = r.next();
                     s.push(k);
         		}  
-
-
-
+*/
+            	for(int i=0;i<=10;i++){
+            		String k="zsdsdfse";
+            		s.push(k);
+            	}
+            	System.out.println("TTT");
                 s.search();
+                s.writer();
                 System.out.println("List");
             }
 
