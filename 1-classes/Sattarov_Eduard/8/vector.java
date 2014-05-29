@@ -28,17 +28,19 @@ public class vector{
 		vector v1 = new vector();
 		vector v2 = new vector();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("¬ведите координаты первого вектора(x, y):");
+		
+		System.out.println("Enter first vector coordinates(x, y):");
 		v1.init(sc.nextInt(), sc.nextInt());
-		System.out.println("¬ведите координаты второго вектора(x, y):");
+		System.out.println("Enter second vector coordinates(x, y):");
 		v2.init(sc.nextInt(), sc.nextInt());
+		
 		v1.plusing(v2);
 		System.out.println("v1+v2 = "+v1.a+", "+v1.b);
 		
 		v1.minusing(v2);
 		System.out.println("v1+v2-v2 = "+v1.a+", "+v1.b);
 		
-		System.out.println("¬ведите константу, на которую надо умножить вектор: ");
+		System.out.println("Enter constant: ");
 		int n = sc.nextInt();
 		v1.constconjunction(n);
 		System.out.println("(v1+v2-v2)*"+n+" = "+v1.a+", "+v1.b);
