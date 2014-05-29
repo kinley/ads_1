@@ -21,8 +21,9 @@ public class Test {
 			 array.add(key, val);
 		 }
 		 graph.setToTree(array);
-		 System.out.println(graph.getMin());
 		 graph.printDFS();
+		 System.out.println(graph.getMin());
+		
 		
 		}
 }
