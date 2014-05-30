@@ -5,7 +5,7 @@ import java.util.Scanner;
 class listelement{
 	listelement next;
 	String data;
-}
+	}
 
 class list{
 	private listelement head;
@@ -31,10 +31,9 @@ class list{
 		}
 	}
 	
-	void init(String line){
+	void initlist(String line){ //разбивает строку на слова и записывает их в список
 		String word = "";
-		int i = 0;
-		while(line.charAt(i) != '.'){
+		for(int i = 0; i < line.length(); i++){
 			if((line.charAt(i) >= 'A') && (line.charAt(i) <= 'z')){
 				word = word + line.charAt(i);
 			}
@@ -44,8 +43,39 @@ class list{
 				}
 				word = "";
 			}
-			i++;
 		}
+	}
+	
+	void prohod(){ //строим противоположные слова
+		listelement n = head;
+		while(n != null){
+			String reverse = "";
+			for(int m = n.data.length() - 1; m >= 0; m--)
+				reverse = reverse + n.data.charAt(m);
+			System.out.println(reverse);
+			delreverse(reverse);
+			n = n.next;
+		}
+	}
+	void delreverse(String word){ //противоположное слово сравниваем со всеми и удаляем пары одинаковых
+		if ((head == null)||(head == tail)){
+			return;
+		}
+		if (head.data == word){
+			head = head.next;
+			return;
+		}
+		listelement z = head;
+		while(z.next != null){
+			if(z.next.data == word){
+				if(tail == z.next){
+					tail = z;
+				}
+			}
+			z.next = z.next.next;
+			return;
+		}
+		z = z.next;
 	}
 }
 
@@ -54,8 +84,8 @@ public class lists3{
 		Scanner sc = new Scanner(System.in);
 		list a = new list();
 		System.out.println("Enter a string, end of input is <<.>>");
-		//a.addend(sc.nextLine());
-		a.init(sc.nextLine());
+		a.initlist(sc.nextLine());
+		//a.prohod();
 		a.printlist();
 	}
 }
