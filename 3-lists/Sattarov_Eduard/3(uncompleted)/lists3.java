@@ -32,18 +32,19 @@ class list{
 	}
 	
 	void init(String line){
-		int i = 1;
-		char c;
 		String word = "";
+		int i = 0;
 		while(line.charAt(i) != '.'){
-			c = line.charAt(i);
-			if((c != ' ') && (c != '.')){
-				word = word + c;
+			if((line.charAt(i) >= 'A') && (line.charAt(i) <= 'z')){
+				word = word + line.charAt(i);
 			}
 			else{
-				addend(word);
+				if (word.length() != 0){ //если есть несколько идущих подряд не латинских, не считать за слово
+					addend(word);
+				}
 				word = "";
 			}
+			i++;
 		}
 	}
 }
